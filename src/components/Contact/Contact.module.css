@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    padding: 10px;
+    border: 1px solid black;
+    width: 170px;
+    align-items: center;
+    justify-content: space-betwen;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.common {
+    display: flex;
+    flex-direction: column;
+}
+
+.number {
+    gap: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.phone {
+    gap: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.delete {
+    position: absolute;
+    top: -15%;
+    left: 85%;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    font-size: 40px;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.delete:hover {
+    color: rgb(194, 17, 17);
+}
