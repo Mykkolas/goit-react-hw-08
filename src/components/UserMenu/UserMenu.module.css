@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #d32f2e;
+    padding: 1px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+
+.userName {
+    color: black;
+    font-weight: bold;
+}

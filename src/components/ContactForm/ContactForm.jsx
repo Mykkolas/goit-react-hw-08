@@ -1,15 +1,15 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import styles from "./ContactForm.module.css"
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsOps";
+import { addContact } from "../../redux/contacts/operations";
+import { Box, Button, TextField } from "@mui/material";
 
 export default function ContactForm() {
     const dispatch = useDispatch()
 
     const FeedbackSchema = Yup.object().shape({
         name: Yup.string().min(3, "Too Short!").max(50, "Too Long!").required("Required"),
-        number: Yup.string().min(3, "Too short").max(50, "Too long").required("Required"),
+        number: Yup.string().matches(/^[0-9]+$/, "Must be a valid phone number").required("Required"),
     });
 
     const initialValues = {
@@ -28,28 +28,98 @@ export default function ContactForm() {
 
 
     return (
-        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
-            {({ isValid }) => (
-                <Form>
-                    <div className={styles.innercontainer}>
-                        <div className={styles.contacts}>
-                            <label htmlFor="name">Name</label>
-                            <Field type="text" name="name" id="name" />
-                            <ErrorMessage name="name" component="div" className={styles.error} />
+        <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="35vh"
 
-                            <label htmlFor="number">Phone</label>
-                            <Field type="tel" name="number" id="number" />
-                            <ErrorMessage name="number" component="div" className={styles.error} />
+        >
+            <Box
+                sx={{
+                    maxWidth: 300,
+                    width: "100%",
+                    backgroundColor: "#fff",
+                    padding: 2,
+                    borderRadius: 2,
+                    boxShadow: 3,
+                }}
+            >
+                <Formik
+                    initialValues={initialValues}
+                    onSubmit={handleSubmit}
+                    validationSchema={FeedbackSchema}
+                >
+                    {({ isValid, errors, touched }) => (
+                        <Form>
+                            <Box display="flex" flexDirection="column" gap={1}>
+                                <Field
+                                    name="name"
+                                    as={TextField}
+                                    label="Name"
+                                    variant="outlined"
+                                    fullWidth
+                                    error={Boolean(touched.name && errors.name)}
+                                    helperText={touched.name && errors.name ? errors.name : " "}
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                            '& fieldset': {
+                                                borderColor: '#1976d2',
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: '#1976d2',
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#1976d2',
+                                            },
+                                        },
+                                    }}
+                                />
 
-                        </div>
-                        <button type="submit" disabled={!isValid} className={styles.btn}>
-                            Add contact
-                        </button>
-                    </div>
+                                <Field
+                                    name="number"
+                                    as={TextField}
+                                    label="Phone"
+                                    variant="outlined"
+                                    fullWidth
+                                    error={Boolean(touched.number && errors.number)}
+                                    helperText={touched.number && errors.number ? errors.number : " "}
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                            '& fieldset': {
+                                                borderColor: '#1976d2',
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: '#1976d2',
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#1976d2',
+                                            },
+                                        },
+                                    }}
+                                />
 
-                </Form>
-            )
-            }
-        </Formik >
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    fullWidth
+                                    sx={{
+                                        fontWeight: 600,
+                                        padding: "10px 0",
+                                        '&:hover': {
+                                            backgroundColor: '#1565c0',
+                                        },
+                                    }}
+                                    disabled={!isValid}
+                                >
+                                    Add Contact
+                                </Button>
+                            </Box>
+                        </Form>
+                    )}
+                </Formik>
+            </Box>
+        </Box>
     );
 }
