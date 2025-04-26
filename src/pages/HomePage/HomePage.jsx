@@ -1,5 +1,5 @@
 import { Alert, Box, Typography } from "@mui/material";
-import ContactPhoneIcon from '@mui/icons-material/ContactPhone'; // << NEW ICON
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
