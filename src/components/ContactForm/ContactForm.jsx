@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
@@ -6,6 +6,7 @@ import { Box, Button, TextField } from "@mui/material";
 import toast from "react-hot-toast";
 
 export default function ContactForm() {
+
     const dispatch = useDispatch()
 
     const FeedbackSchema = Yup.object().shape({
@@ -40,8 +41,7 @@ export default function ContactForm() {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            minHeight="35vh"
-            mt={2}
+            mt={5}
         >
             <Box
                 sx={{

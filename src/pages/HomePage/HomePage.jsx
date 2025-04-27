@@ -12,10 +12,10 @@ const HomePage = () => {
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            minHeight="90vh"
             textAlign="center"
             sx={{
                 color: "white",
+                mt: { xs: 10, md: 20 }
             }}
         >
             <ContactPhoneIcon sx={{ fontSize: 80, mb: 2 }} />

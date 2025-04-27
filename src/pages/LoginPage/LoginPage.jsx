@@ -32,7 +32,9 @@ const RegistrationPage = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            minHeight="90vh"
+            sx={{
+                mt: { xs: 5, md: 10 }
+            }}
         /*   bgcolor="#f0f2f5" */
         >
             <Card sx={{ maxWidth: 400, width: '90%', padding: 2 }}>

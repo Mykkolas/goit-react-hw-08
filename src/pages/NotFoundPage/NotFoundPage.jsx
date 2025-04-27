@@ -7,7 +7,7 @@ const NotFoundPage = () => {
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            minHeight="80vh"
+            mt={15}
             textAlign="center"
         >
             <Typography variant="h4" color='#fff' gutterBottom>

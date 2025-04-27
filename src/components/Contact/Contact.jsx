@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteContact, updateContact } from "../../redux/contacts/operations";
 import { Card, CardContent, Typography, IconButton, Box, TextField } from '@mui/material';
@@ -9,19 +9,31 @@ import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import toast from "react-hot-toast";
 
+
+
 export default function Contact({ data }) {
     const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
     const [editedName, setEditedName] = useState(data.name);
     const [editedNumber, setEditedNumber] = useState(data.number);
+    const [isVisible, setIsVisible] = useState(false); // NEW
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsVisible(true);
+        }, 50); // Small delay to trigger the animation
+        return () => clearTimeout(timer);
+    }, []);
 
     const handleDelete = async () => {
-        try {
-            await dispatch(deleteContact(data.id)).unwrap();
-            toast.success(`Contact ${data.name} deleted!`);
-        } catch (error) {
-            toast.error(`Failed to delete contact: ${error}`);
-        }
+        setIsVisible(false); // starting animation
+        setTimeout(async () => { // giving time for animation
+            try {
+                await dispatch(deleteContact(data.id)).unwrap();
+                toast.success(`Contact ${data.name} deleted!`);
+            } catch (error) {
+                toast.error(`Failed to delete contact: ${error}`);
+            }
+        }, 300);
     };
 
 
@@ -48,7 +60,10 @@ export default function Contact({ data }) {
                 borderRadius: 3,
                 boxShadow: 3,
                 position: 'relative',
-                marginBottom: 2
+                marginBottom: 2,
+                transition: 'opacity 0.3s ease, transform 0.3s ease',
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'scale(1)' : 'scale(0.8)'
             }}
         >
             <IconButton
