@@ -4,7 +4,7 @@ export default function Loader({ loading }) {
     return (
         loading &&
         <div className={s.loader}>
-            <RingLoader color="#FFD700" loading={loading} size={50} />
+            <RingLoader color="green" loading={loading} size={50} />
         </div>
     )
 }

@@ -13,7 +13,7 @@ export default function SearchBox() {
 
     return (
         <Box display="flex" flexDirection="column" alignItems="center" mt={1} mb={5}>
-            <Typography variant="p" gutterBottom textAlign="center">
+            <Typography variant="p" gutterBottom textAlign="center" color="rgba(255, 255, 255, 0.8)" fontSize={13}>
                 Find contacts by name or number
             </Typography>
 
@@ -27,7 +27,7 @@ export default function SearchBox() {
                 sx={{
                     boxShadow: 3,
                     maxWidth: 300,
-                    backgroundColor: '#fff',
+                    backgroundColor: 'transparent',
                     borderRadius: 2,
                     overflow: 'hidden',
                     '& .MuiOutlinedInput-root': {
@@ -43,10 +43,10 @@ export default function SearchBox() {
                         },
                     },
                     '& .MuiInputBase-root': {
-                        color: 'black',
+                        color: 'white',
                     },
                     '& .MuiInputLabel-root': {
-                        color: 'black',
+                        color: 'white',
                     },
                 }}
             />

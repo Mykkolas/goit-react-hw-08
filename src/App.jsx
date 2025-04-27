@@ -14,11 +14,12 @@ import { selectLoading } from './redux/contacts/selectors'
 import { userRefresh } from './redux/auth/operations'
 import Layout from './components/Layout/Layout'
 import HomePage from './pages/HomePage/HomePage'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   const dispatch = useDispatch()
   const isRefreshing = useSelector(selectIsRefreshing)
-  const loading = useSelector(selectLoading) // not sure
+  const loading = useSelector(selectLoading)
 
   useEffect(() => {
     dispatch(userRefresh())
@@ -29,6 +30,7 @@ function App() {
   }
   return (
     <Layout>
+      <div><Toaster /></div>
       <Suspense>
         <Routes>
           <Route path='/' element={<HomePage />} />

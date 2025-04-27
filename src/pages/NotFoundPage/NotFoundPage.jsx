@@ -1,9 +1,29 @@
-
+import { Box, Typography, Button } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 const NotFoundPage = () => {
     return (
-        <div>
-            <a href="/">RETURN</a>
-        </div>
+        <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            minHeight="80vh"
+            textAlign="center"
+        >
+            <Typography variant="h4" color='#fff' gutterBottom>
+                Seems like this URL is not valid
+            </Typography>
+
+            <Button
+                component={NavLink}
+                to="/"
+                variant="contained"
+                color="primary"
+                sx={{ mt: 2 }}
+            >
+                Return Home
+            </Button>
+        </Box>
     )
 }
 

@@ -3,10 +3,10 @@ import * as Yup from "yup";
 import { Box, Button, Card, CardContent, TextField, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../redux/auth/operations";
+import toast from "react-hot-toast";
 
 const RegistrationPage = () => {
     const dispatch = useDispatch()
-
     const FeedbackSchema = Yup.object().shape({
         email: Yup.string().email("Invalid email").min(3, "Too short").max(40, "Too long").required("Required"),
         password: Yup.string().min(8, "Too short").max(20, "Too long").required("Required"),
@@ -17,11 +17,16 @@ const RegistrationPage = () => {
         password: "",
     };
 
-    const handleSubmit = (values, { resetForm }) => {
-        dispatch(userLogin(values))
+    const handleSubmit = async (values, { resetForm }) => {
+        try {
+            await dispatch(userLogin(values)).unwrap()
+            toast.success("Successful login!")
+        }
+        catch (err) {
+            toast.error(`Failed to login: ${err.message || err}`)
+        }
         resetForm();
     };
-
     return (
         <Box
             display="flex"

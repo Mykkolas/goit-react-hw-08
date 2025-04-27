@@ -11,7 +11,10 @@ const AppBar = () => {
     return (
         <MuiAppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 0 }}>
             <Container maxWidth="lg">
-                <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', minHeight: '64px' }}>
+                <Toolbar disableGutters sx={{
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center', minHeight: '64px', flexDirection: { xs: 'column', md: 'row' }, // <--- here
+                    gap: { xs: 2, md: 0 },
+                }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                         <Navigation />
                     </Box>

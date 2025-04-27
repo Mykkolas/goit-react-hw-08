@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 import { Box, Button, TextField } from "@mui/material";
+import toast from "react-hot-toast";
 
 export default function ContactForm() {
     const dispatch = useDispatch()
@@ -17,12 +18,19 @@ export default function ContactForm() {
         number: "",
     };
 
-    const handleSubmit = (values, { resetForm }) => {
-        dispatch(addContact({
-            id: values.id,
-            name: values.name,
-            number: values.number
-        }));
+    const handleSubmit = async (values, { resetForm }) => {
+        try {
+            await dispatch(addContact({
+                id: values.id,
+                name: values.name,
+                number: values.number
+            })).unwrap();
+            toast.success(`Contact ${values.name} added!`)
+        }
+        catch (err) {
+            toast.error(`Failed to add new contact: ${err.message || err}`)
+        }
+
         resetForm();
     };
 
@@ -33,7 +41,7 @@ export default function ContactForm() {
             justifyContent="center"
             alignItems="center"
             minHeight="35vh"
-
+            mt={2}
         >
             <Box
                 sx={{

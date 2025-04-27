@@ -7,6 +7,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
+import toast from "react-hot-toast";
 
 export default function Contact({ data }) {
     const dispatch = useDispatch();
@@ -14,27 +15,40 @@ export default function Contact({ data }) {
     const [editedName, setEditedName] = useState(data.name);
     const [editedNumber, setEditedNumber] = useState(data.number);
 
-    const handleDelete = () => dispatch(deleteContact(data.id));
+    const handleDelete = async () => {
+        try {
+            await dispatch(deleteContact(data.id)).unwrap();
+            toast.success(`Contact ${data.name} deleted!`);
+        } catch (error) {
+            toast.error(`Failed to delete contact: ${error}`);
+        }
+    };
+
 
     const handleEdit = () => setIsEditing(true);
 
-    const handleSave = () => {
-        dispatch(updateContact({ id: data.id, name: editedName, number: editedNumber }));
-        setIsEditing(false);
+    const handleSave = async () => {
+        try {
+            await dispatch(updateContact({ id: data.id, name: editedName, number: editedNumber })).unwrap();
+            toast.success(`Contact ${editedName} updated!`);
+            setIsEditing(false);
+        } catch (err) {
+            toast.error(`Failed to update contact: ${err.message || err}`);
+        }
     };
+
 
     return (
         <Card
             sx={{
-                minWidth: 200,
-                maxWidth: 250,
+                minWidth: 230,
+                maxWidth: 260,
                 maxHeight: 120,
                 backgroundColor: '#fff',
                 borderRadius: 3,
                 boxShadow: 3,
-                p: 1,
-                mb: 2,
                 position: 'relative',
+                marginBottom: 2
             }}
         >
             <IconButton
