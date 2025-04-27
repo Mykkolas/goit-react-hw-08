@@ -15,7 +15,7 @@ export const UserMenu = () => {
             toast.success(`Log out successful!`)
         }
         catch (err) {
-            toast.error(`Failed to logout: ${err.message || err}`)
+            toast.error(`Failed to logout: ${err}`)
         }
     }
     return (

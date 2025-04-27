@@ -45,7 +45,7 @@ export default function Contact({ data }) {
             toast.success(`Contact ${editedName} updated!`);
             setIsEditing(false);
         } catch (err) {
-            toast.error(`Failed to update contact: ${err.message || err}`);
+            toast.error(`Failed to update contact: ${err}`);
         }
     };
 

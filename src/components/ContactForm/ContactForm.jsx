@@ -29,7 +29,7 @@ export default function ContactForm() {
             toast.success(`Contact ${values.name} added!`)
         }
         catch (err) {
-            toast.error(`Failed to add new contact: ${err.message || err}`)
+            toast.error(`Failed to add new contact: ${err}`)
         }
 
         resetForm();

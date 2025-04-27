@@ -21,11 +21,11 @@ const RegistrationPage = () => {
         try {
             await dispatch(userLogin(values)).unwrap()
             toast.success("Successful login!")
+            resetForm();
         }
         catch (err) {
-            toast.error(`Failed to login: ${err.message || err}`)
+            toast.error(`Failed to login: ${err}. Try again!`)
         }
-        resetForm();
     };
     return (
         <Box
@@ -35,7 +35,6 @@ const RegistrationPage = () => {
             sx={{
                 mt: { xs: 5, md: 10 }
             }}
-        /*   bgcolor="#f0f2f5" */
         >
             <Card sx={{ maxWidth: 400, width: '90%', padding: 2 }}>
                 <CardContent>

@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { Box, Button, Card, CardContent, TextField, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { userRegister } from "../../redux/auth/operations";
+import toast from "react-hot-toast";
 
 const RegistrationPage = () => {
     const dispatch = useDispatch()
@@ -18,9 +19,15 @@ const RegistrationPage = () => {
         password: "",
     };
 
-    const handleSubmit = (values, { resetForm }) => {
-        dispatch(userRegister(values))
-        resetForm();
+    const handleSubmit = async (values, { resetForm }) => {
+        try {
+            await dispatch(userRegister(values)).unwrap()
+            toast.success(`${values.name} registered!`)
+            resetForm();
+        }
+        catch (err) {
+            toast.error(`Failed to register: ${err}. Try another email!`)
+        }
     };
 
     return (
